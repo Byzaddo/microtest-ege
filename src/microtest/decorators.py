@@ -39,3 +39,40 @@ def test(func=None, *, name: str | None = None):
 
     return decorator(func)
 
+
+def skip(reason: str = "Skipped"):
+    """
+    Register a test but mark it as skipped.
+
+    Usage:
+
+        @skip("Not implemented yet")
+        def test_something():
+            ...
+    """
+
+    def decorator(test_func):
+        _TESTS.append(
+            TestCase(
+                func=test_func,
+                name=test_func.__name__,
+                skip_reason=reason,
+            )
+        )
+        return test_func
+
+    return decorator
+
+def get_tests() -> list[TestCase]:
+    """
+    Return a copy of all registered tests.
+    """
+    return list(_TESTS)
+
+def clear_tests() -> None:
+    """
+    Clear the test registry.
+
+    Mostly useful internally or for advanced usage.
+    """
+    _TESTS.clear()
