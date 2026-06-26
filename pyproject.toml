@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "microtest-ege"
+version = "0.1.0"
+description = "A tiny Python testing framework built for learning how test libraries work."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Ege" }
+]
+license = { text = "MIT" }
+keywords = ["testing", "assertions", "education", "test-framework"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.scripts]
+microtest = "microtest.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
