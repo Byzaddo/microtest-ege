@@ -1,9 +1,9 @@
-from dataclasses import dataclass
-from typing import Callable
+from dataclasses import dataclass # to store test case inforation
+from typing import Callable # to type hnt the function type 
 
 
 @dataclass
-class TestCase:
+class TestCase: # to store information about THE test case
     func: Callable
     name: str
     skip_reason: str | None = None
@@ -12,22 +12,8 @@ class TestCase:
 _TESTS: list[TestCase] = []
 
 
-def test(func=None, *, name: str | None = None):
-    """
-    Register a function as a test.
+def test(func=None, *, name: str | None = None): # to register the func as a test, can name if want
 
-    Usage:
-
-        @test
-        def test_addition():
-            ...
-
-    Or:
-
-        @test(name="custom name")
-        def some_test():
-            ...
-    """
 
     def decorator(test_func):
         test_name = name or test_func.__name__
@@ -40,16 +26,7 @@ def test(func=None, *, name: str | None = None):
     return decorator(func)
 
 
-def skip(reason: str = "Skipped"):
-    """
-    Register a test but mark it as skipped.
-
-    Usage:
-
-        @skip("Not implemented yet")
-        def test_something():
-            ...
-    """
+def skip(reason: str = "Skipped"):    # to register a test but skip it 
 
     def decorator(test_func):
         _TESTS.append(
